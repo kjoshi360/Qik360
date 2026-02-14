@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function BillingPage() {
-  const data = useModuleData('billing' === 'whatsapp' ? 'whatsapp' : 'billing');
-  return <Card><h1>Billing</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="Billing" module="billing" createLabel="Create Billing Record" />;
 }

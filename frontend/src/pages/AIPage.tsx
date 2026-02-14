@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function AIPage() {
-  const data = useModuleData('ai' === 'whatsapp' ? 'whatsapp' : 'ai');
-  return <Card><h1>AI</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="AI Config" module="ai" createLabel="Create AI Setting" />;
 }

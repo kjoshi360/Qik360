@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function ConversationsPage() {
-  const data = useModuleData('conversations' === 'whatsapp' ? 'whatsapp' : 'conversations');
-  return <Card><h1>Conversations</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="Conversations" module="conversations" createLabel="Create Conversation" />;
 }

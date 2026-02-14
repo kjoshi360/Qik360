@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function AutomationPage() {
-  const data = useModuleData('automation' === 'whatsapp' ? 'whatsapp' : 'automation');
-  return <Card><h1>Automation</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="Automation" module="automation" createLabel="Create Workflow Trigger" />;
 }

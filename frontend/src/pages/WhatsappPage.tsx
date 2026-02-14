@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function WhatsappPage() {
-  const data = useModuleData('whatsapp' === 'whatsapp' ? 'whatsapp' : 'whatsapp');
-  return <Card><h1>Whatsapp</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="WhatsApp Connect" module="whatsapp" createLabel="Connect WhatsApp" />;
 }

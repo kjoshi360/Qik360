@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function TeamPage() {
-  const data = useModuleData('team' === 'whatsapp' ? 'whatsapp' : 'team');
-  return <Card><h1>Team</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="Team" module="user" createLabel="Invite Team Member" />;
 }

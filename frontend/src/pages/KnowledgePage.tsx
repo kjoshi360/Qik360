@@ -1,7 +1,5 @@
-import { Card } from '../components/ui/Card';
-import { useModuleData } from '../hooks/useModuleData';
+import { ModulePage } from '../components/ui/ModulePage';
 
 export function KnowledgePage() {
-  const data = useModuleData('knowledge' === 'whatsapp' ? 'whatsapp' : 'knowledge');
-  return <Card><h1>Knowledge</h1><pre>{JSON.stringify(data, null, 2)}</pre></Card>;
+  return <ModulePage title="Knowledge Base" module="knowledge" createLabel="Add Knowledge Base" />;
 }
