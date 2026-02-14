@@ -44,6 +44,7 @@
 ## Setup
 1. Backend:
    - `cd backend && cp .env.example .env`
+   - Default `DATABASE_URL` is preconfigured for Render Postgres integration: `postgresql://qik360:952gXG5aWtbnl9aCLo2HOOvW7iRGeqmv@dpg-d687anrh46gs73f9b3gg-a.oregon-postgres.render.com/qik360`
    - `npm install`
    - `npx prisma generate`
    - `npx prisma migrate dev`
@@ -51,6 +52,7 @@
    - `npm run start:dev`
 2. Frontend:
    - `cd frontend && cp .env.example .env`
+   - Ensure `VITE_API_BASE_URL` points to your backend (default: `http://localhost:3000/api/v1`)
    - `npm install`
    - `npm run dev`
 
