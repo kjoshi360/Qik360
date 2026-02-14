@@ -56,6 +56,10 @@
    - `npm install`
    - `npm run dev`
 
+## Seeded logins
+- Admin: `admin@qik360.dev` / `Admin@123`
+- Owner: `owner@qik360.dev` / `Owner@123`
+
 ## OpenAI API key
 Set `OPENAI_API_KEY` in `backend/.env`.
 
