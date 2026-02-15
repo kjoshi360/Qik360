@@ -1,1 +1,0 @@
--- Initial schema managed by Prisma migrate
