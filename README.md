@@ -96,6 +96,11 @@ Set `OPENAI_API_KEY` in `backend/.env`.
 ## Billing & subscriptions
 Plans: FREE, PRO, ENTERPRISE with role/plan guards in backend and filtered navigation in frontend.
 
+## Postman collection
+- Import `postman/Qik360_API.postman_collection.json` into Postman.
+- Update collection variables: `baseUrl`, `tenantId`, and `token` as needed.
+- Run `Auth > Login Admin` first to auto-store `token` for protected requests.
+
 ## Tests
 - Backend: `cd backend && npm test`
 - Frontend: `cd frontend && npm test`
