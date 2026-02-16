@@ -1,0 +1,172 @@
+{
+  "info": {
+    "name": "Qik360 API",
+    "_postman_id": "6f63b8f3-1145-4e90-9d15-fd663bd23a9e",
+    "description": "Qik360 multi-tenant SaaS API collection with auth and module endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api/v1" },
+    { "key": "tenantId", "value": "seed-tenant" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Tenant Owner",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantName\": \"Acme\",\n  \"email\": \"owner@acme.com\",\n  \"password\": \"Owner@123\",\n  \"role\": \"OWNER\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.accessToken) { pm.collectionVariables.set('token', json.accessToken); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@qik360.dev\",\n  \"password\": \"Admin@123\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tenant",
+      "item": [
+        {
+          "name": "List Tenants",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" }
+            ],
+            "url": "{{baseUrl}}/tenant"
+          }
+        },
+        {
+          "name": "Create Tenant Payload",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/tenant",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Primary Tenant\",\n  \"metadata\": {\n    \"source\": \"postman\"\n  }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Operational Modules",
+      "item": [
+        {
+          "name": "Conversations - List",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" }
+            ],
+            "url": "{{baseUrl}}/conversations"
+          }
+        },
+        {
+          "name": "Messages - Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/messages",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Outbound Message\",\n  \"metadata\": {\n    \"channel\": \"whatsapp\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "WhatsApp - Connect",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/whatsapp",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumberId\": \"1234567890\",\n  \"accessToken\": \"meta_token\"\n}"
+            }
+          }
+        },
+        {
+          "name": "AI - Create Setting",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/ai",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Default AI\",\n  \"metadata\": {\n    \"model\": \"gpt-4o-mini\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Automation - Trigger",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "x-tenant-id", "value": "{{tenantId}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": "{{baseUrl}}/automation",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Webhook Trigger\",\n  \"metadata\": {\n    \"workflow\": \"lead-routing\"\n  }\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
