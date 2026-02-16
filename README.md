@@ -96,6 +96,15 @@ Set `OPENAI_API_KEY` in `backend/.env`.
 ## Billing & subscriptions
 Plans: FREE, PRO, ENTERPRISE with role/plan guards in backend and filtered navigation in frontend.
 
+## Frontend page architecture (96 pages)
+- Route catalogs are module-organized:
+  - `frontend/src/pages/promotional/index.ts` (29 pages)
+  - `frontend/src/pages/tenant/index.ts` (44 pages)
+  - `frontend/src/pages/admin/index.ts` (23 pages)
+- Routing is wired from these catalogs in `frontend/src/app/App.tsx`.
+- Tenant/Admin pages use shared API-connected scaffold: `frontend/src/pages/shared/ModuleConnectedPage.tsx`.
+- Promotional pages use shared marketing scaffold: `frontend/src/pages/shared/PublicPage.tsx`.
+
 ## Postman collection
 - Import `postman/Qik360_API.postman_collection.json` into Postman.
 - Update collection variables: `baseUrl`, `tenantId`, and `token` as needed.

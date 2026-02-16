@@ -3,9 +3,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 
 describe('App', () => {
-  it('renders login when unauthenticated', () => {
+  it('renders Home page when visiting root', () => {
     localStorage.clear();
+    window.history.pushState({}, 'Home', '/');
     render(<BrowserRouter><App /></BrowserRouter>);
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
   });
 });
