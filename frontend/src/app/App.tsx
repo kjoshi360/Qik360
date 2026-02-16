@@ -1,9 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { Sidebar } from '../components/layout/Sidebar';
 import { useAuthStore } from '../store/authStore';
 import { LoginPage } from '../pages/LoginPage';
-import { PlatformPage } from '../pages/PlatformPage';
-import { adminRoutes, promotionalRoutes, tenantRoutes } from '../config/platformRoutes';
-import { PlatformSidebar } from '../components/layout/PlatformSidebar';
+import { DashboardPage } from '../pages/DashboardPage';
+import { ConversationsPage } from '../pages/ConversationsPage';
+import { WhatsappPage } from '../pages/WhatsappPage';
+import { AIPage } from '../pages/AIPage';
+import { KnowledgePage } from '../pages/KnowledgePage';
+import { AutomationPage } from '../pages/AutomationPage';
+import { BillingPage } from '../pages/BillingPage';
+import { TeamPage } from '../pages/TeamPage';
+import { SettingsPage } from '../pages/SettingsPage';
 
 function Protected({ children }: { children: JSX.Element }) {
   const token = useAuthStore((s) => s.token);
@@ -11,43 +18,25 @@ function Protected({ children }: { children: JSX.Element }) {
   return children;
 }
 
-function AppShell({ scope }: { scope: 'tenant' | 'admin' }) {
-  const routes = scope === 'admin' ? adminRoutes : tenantRoutes;
-
-  return (
-    <div className="layout">
-      <PlatformSidebar scope={scope} />
-      <main className="content">
-        <Routes>
-          {routes.map((route) => (
-            <Route key={route.key} path={route.path} element={<PlatformPage title={route.title} apiModule={route.apiModule} />} />
-          ))}
-        </Routes>
-      </main>
-    </div>
-  );
+function Shell() {
+  return <div className="layout"><Sidebar /><main className="content"><Routes>
+    <Route path="/" element={<DashboardPage />} />
+    <Route path="/conversations" element={<ConversationsPage />} />
+    <Route path="/whatsapp" element={<WhatsappPage />} />
+    <Route path="/ai" element={<AIPage />} />
+    <Route path="/knowledge" element={<KnowledgePage />} />
+    <Route path="/automation" element={<AutomationPage />} />
+    <Route path="/billing" element={<BillingPage />} />
+    <Route path="/team" element={<TeamPage />} />
+    <Route path="/settings" element={<SettingsPage />} />
+  </Routes></main></div>;
 }
-
-const authKeys = new Set(['login', 'register', 'forgot-password', 'reset-password', 'email-verification']);
 
 export function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<PlatformPage title="Register" />} />
-      <Route path="/forgot-password" element={<PlatformPage title="Forgot Password" />} />
-      <Route path="/reset-password" element={<PlatformPage title="Reset Password" />} />
-      <Route path="/email-verification" element={<PlatformPage title="Email Verification" />} />
-
-      {promotionalRoutes
-        .filter((route) => !authKeys.has(route.key))
-        .map((route) => (
-          <Route key={route.key} path={route.path} element={<PlatformPage title={route.title} />} />
-        ))}
-
-      <Route path="/app/*" element={<Protected><AppShell scope="tenant" /></Protected>} />
-      <Route path="/admin/*" element={<Protected><AppShell scope="admin" /></Protected>} />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/*" element={<Protected><Shell /></Protected>} />
     </Routes>
   );
 }
