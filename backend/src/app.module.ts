@@ -19,12 +19,19 @@ import { BillingModule } from './modules/billing/billing.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { SubscriptionModule } from './modules/subscription/subscription.module';
 import { PermissionsModule } from './modules/permissions/permissions.module';
+import { OrganizationsModule } from './modules/organizations/organizations.module';
+import { CrmModule } from './modules/crm/crm.module';
+import { MetaAdsModule } from './modules/meta-ads/meta-ads.module';
+import { KafkaModule } from './integrations/kafka/kafka.module';
+import { RedisModule } from './integrations/redis/redis.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 120 }]),
     PrismaModule,
+    RedisModule,
+    KafkaModule,
     AuthModule,
     TenantModule,
     UserModule,
@@ -36,6 +43,9 @@ import { PermissionsModule } from './modules/permissions/permissions.module';
     KnowledgeModule,
     AutomationModule,
     BillingModule,
+    OrganizationsModule,
+    CrmModule,
+    MetaAdsModule,
     AnalyticsModule,
     SubscriptionModule,
     PermissionsModule,
