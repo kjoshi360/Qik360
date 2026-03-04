@@ -19,6 +19,7 @@ import { BillingModule } from './modules/billing/billing.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { SubscriptionModule } from './modules/subscription/subscription.module';
 import { PermissionsModule } from './modules/permissions/permissions.module';
+import { MetaAdsModule } from './modules/meta-ads/meta-ads.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { PermissionsModule } from './modules/permissions/permissions.module';
     AnalyticsModule,
     SubscriptionModule,
     PermissionsModule,
+    MetaAdsModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
