@@ -8,6 +8,7 @@ export default () => ({
     webhookSecret: process.env.WHATSAPP_WEBHOOK_SECRET ?? 'webhook-secret',
     openAiApiKey: process.env.OPENAI_API_KEY ?? '',
     whatsappApiUrl: process.env.WHATSAPP_API_URL ?? 'https://graph.facebook.com/v21.0',
+    metaApiUrl: process.env.META_API_URL ?? 'https://graph.facebook.com/v21.0',
     n8nWebhookUrl: process.env.N8N_WEBHOOK_URL ?? '',
   },
   database: {
